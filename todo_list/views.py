@@ -20,23 +20,18 @@ class TaskListView(ListView):
 class TaskCreateView(CreateView):
     model = Task
     fields = "__all__"
-    success_url = reverse_lazy("todo-list:task-list")
+    success_url = reverse_lazy("todo_list:task-list")
 
 
 class TaskUpdateView(UpdateView):
     model = Task
     fields = "__all__"
-    success_url = reverse_lazy("todo-list:task-list")
+    success_url = reverse_lazy("todo_list:task-list")
 
 
 class TaskDeleteView(DeleteView):
     model = Task
-    success_url = reverse_lazy("todo-list:task-list")
-
-
-class TagListView(ListView):
-    queryset = Tag.objects.all()
-    paginate_by = 10
+    success_url = reverse_lazy("todo_list:task-list")
 
 
 class DoUndoTaskView(View):
@@ -51,3 +46,25 @@ class DoUndoTaskView(View):
             task.done = True
         task.save()
         return HttpResponseRedirect(reverse_lazy("todo_list:task-list"))
+
+
+class TagListView(ListView):
+    queryset = Tag.objects.all()
+    paginate_by = 10
+
+
+class TagCreateView(CreateView):
+    model = Tag
+    fields = "__all__"
+    success_url = reverse_lazy("todo_list:tag-list")
+
+
+class TagUpdateView(UpdateView):
+    model = Tag
+    fields = "__all__"
+    success_url = reverse_lazy("todo_list:tag-list")
+
+
+class TagDeleteView(DeleteView):
+    model = Tag
+    success_url = reverse_lazy("todo_list:tag-list")
