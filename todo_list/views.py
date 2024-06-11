@@ -38,12 +38,7 @@ class DoUndoTaskView(View):
     @staticmethod
     def get(request, *args, **kwargs):
         task = get_object_or_404(Task, id=kwargs['pk'])
-
-        if task.done:
-            task.done = False
-
-        else:
-            task.done = True
+        task.done = not task.done
         task.save()
         return HttpResponseRedirect(reverse_lazy("todo_list:task-list"))
 
